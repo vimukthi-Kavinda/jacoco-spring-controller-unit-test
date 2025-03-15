@@ -102,18 +102,35 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.7</version> <!-- or latest version -->
 				<executions>
-					<execution>
+				<!--	<execution>
 						<id>default-prepare-agent</id>
 						<goals>
-							<goal>prepare-agent</goal> <!-- Prepare JaCoCo agent to collect coverage data -->
+							<goal>prepare-agent</goal> <!- Prepare JaCoCo agent to collect coverage data -->
+					<!--			</goals>
+                            </execution>
+                            <execution>
+                                <id>default-report</id>
+                                <goals>
+                                    <goal>report</goal> <!- Generate the coverage report -->
+					<!--	</goals>
+					</execution> -->
+
+<!-- ******************** report gen on mvn test ************************************ -->
+					<execution>
+						<id>1</id>
+						<goals>
+							<goal>prepare-agent</goal>  <!-- Start the agent during tests -->
 						</goals>
+						<phase>test-compile</phase>  <!-- This should run during the test phase -->
 					</execution>
 					<execution>
-						<id>default-report</id>
+						<id>2</id>
 						<goals>
-							<goal>report</goal> <!-- Generate the coverage report -->
+							<goal>report</goal>  <!-- Generate the report after the tests -->
 						</goals>
+						<phase>test</phase>  <!-- Report generation usually happens after tests -->
 					</execution>
+					
 				</executions>
 			</plugin>
 		</plugins>
